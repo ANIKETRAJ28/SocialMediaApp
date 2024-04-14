@@ -1,12 +1,11 @@
 import './App.css'
-import Button from '@mui/material/Button';
 
-import PostCard from './components/PostCard';
+import SocialApp from './components/SocialApp'
 
 function App() {
   return (
     <>
-      <PostCard />
+      <SocialApp/>
     </>
   )
 }
