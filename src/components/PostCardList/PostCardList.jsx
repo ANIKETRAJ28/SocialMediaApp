@@ -1,19 +1,9 @@
-import { useEffect, useState } from "react";
+import { memo, useContext } from "react";
 import PostCard from "../PostCard";
-import axios from "axios";
+import PostContext from "../../context/PostContext";
 
 function PostCardList() {
-    const [posts, setPosts] = useState([]);
-    useEffect(() => {
-        // we will download the content from dummyapi.io
-        axios.get('https://dummyapi.io/data/v1/post', {
-            headers: {'app-id': import.meta.env.VITE_APP_ID}
-        }).then(res => {
-            const responseObj = res.data;
-            setPosts([...responseObj.data])
-        });
-    }, [])
-
+    const {posts, setPosts} = useContext(PostContext);
     return ((posts.length == 0) ? 
         'loading...' :
         <div>
@@ -21,10 +11,11 @@ function PostCardList() {
                 content={post.text}
                 image={post.image}
                 authorFirstName={post.owner.firstName} 
+                publishDate={post.publishDate}
                 key={post.id}
             />)}
         </div>
     )
 }
 
-export default PostCardList;
+export default memo(PostCardList);

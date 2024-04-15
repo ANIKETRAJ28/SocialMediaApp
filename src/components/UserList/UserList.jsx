@@ -1,4 +1,3 @@
-import * as React from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -18,7 +17,7 @@ export default function CheckboxListSecondary() {
             const responseObj = res.data;
             setUsers([...responseObj.data])
         });
-    })
+    }, [])
   return (
     (users.length == 0) ? 
         'loading...' :
