@@ -4,13 +4,18 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import UserProfileHook from '../../hooks/UserProfileHook';
+import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import fetchUser from '../../helpers/fetchUser';
 
 export default function UserDetails() {
-    const [user, loading] = UserProfileHook();
-    if(loading) {
+    // const [user, loading] = UserProfileHook();
+    const { id } = useParams();
+    const response = useQuery(['user', id], fetchUser);
+    if(response.isLoading) {
         return <div>loading...</div>
     } else {
+        const user = response.data.data;
         return (
             <Card sx={{ display: 'flex', mt:'2rem' }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
